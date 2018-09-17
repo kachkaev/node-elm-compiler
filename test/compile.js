@@ -44,6 +44,30 @@ describe("#compile", function() {
 
     }).to.throw();
   });
+
+  it("throws when given a non-existing pathToElm", function () {
+    var opts = {
+      cwd: fixturesDir,
+      pathToElm: '/path/to/non-existing/elm'
+    };
+
+    expect(function() {
+      var compileProcess = compiler.compile(prependFixturesDir("Parent.elm"), opts);
+
+    }).to.throw();
+  });
+
+  it("throws when given pathToElm pointing to a directory", function () {
+    var opts = {
+      cwd: fixturesDir,
+      pathToElm: fixturesDir
+    };
+
+    expect(function() {
+      var compileProcess = compiler.compile(prependFixturesDir("Parent.elm"), opts);
+
+    }).to.throw();
+  });
 });
 
 describe("#compileToString", function() {
